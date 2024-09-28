@@ -126,6 +126,6 @@ public class StandardDeviationHeuristic implements IHeuristic<MagicCube> {
 
         standardDeviation = Math.sqrt(standardDeviation / sums.size());
 
-        return standardDeviation;
+        return -standardDeviation;
     }
 }

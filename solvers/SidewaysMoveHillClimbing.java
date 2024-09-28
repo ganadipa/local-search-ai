@@ -6,6 +6,7 @@ import problems.IProblem;
 public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
     private T problem;
     private IHeuristic<T> heuristic;
+    private final int MAX_SIDEWAYS_MOVES = 100;
 
     public SidewaysMoveHillClimbing(T problem, IHeuristic<T> heuristic) {
         this.problem = problem;
@@ -14,18 +15,18 @@ public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
 
     public void solve() {
         
-
         T currentProblem = (T) this.problem.clone();
-        double score = -heuristic.evaluate(currentProblem);
+        double score = heuristic.evaluate(currentProblem);
 
-        while (true) {
+        int sidewaysMoves = 0;
+        while (sidewaysMoves < MAX_SIDEWAYS_MOVES) {
             T bestNeighbor = null;
             double bestScore = Double.NEGATIVE_INFINITY;
 
             // Find the best neighbor
             for (IProblem neighbor : currentProblem.getNeighbours()) {
                 T castedNeighbor = (T) neighbor;
-                double neighborScore = -heuristic.evaluate(castedNeighbor);
+                double neighborScore = heuristic.evaluate(castedNeighbor);
                 
                 if (neighborScore > bestScore) {
                     bestNeighbor = castedNeighbor;
@@ -37,6 +38,13 @@ public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
             if (bestScore >= score) {
                 currentProblem = bestNeighbor;
                 score = bestScore;
+
+                // If the best neighbor is the same as the current cube, increment the sideways moves counter
+                if (bestScore == score) {
+                    sidewaysMoves++;
+                } else {
+                    sidewaysMoves = 0;
+                }
             } else {
                 break;
             }

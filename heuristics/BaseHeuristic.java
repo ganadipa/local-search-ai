@@ -65,7 +65,6 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
         for (int i = 0; i < c.getLength(); i++) {
             current += c.get(i, i, c.getLength() - i - 1);
         }
-        sums.add(current);
 
         // Diagonal from (0, n-1, 0) to (n-1, 0, n-1)
         current = 0;
@@ -81,6 +80,8 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
         }
         sums.add(current);
 
+
+
         // Add the plane diagonals
 
         // in the xy-plane
@@ -88,6 +89,12 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
             current = 0;
             for (int i = 0; i < c.getLength(); i++) {
                 current += c.get(i, i, z);
+            }
+            sums.add(current);
+
+            current = 0;
+            for (int i = 0; i < c.getLength(); i++) {
+                current += c.get(i, c.getLength() - i - 1, z);
             }
             sums.add(current);
         }
@@ -99,6 +106,12 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
                 current += c.get(i, y, i);
             }
             sums.add(current);
+
+            current = 0;
+            for (int i = 0; i < c.getLength(); i++) {
+                current += c.get(i, y, c.getLength() - i - 1);
+            }
+            sums.add(current);
         }
 
         // in the yz-plane
@@ -106,6 +119,12 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
             current = 0;
             for (int i = 0; i < c.getLength(); i++) {
                 current += c.get(x, i, i);
+            }
+            sums.add(current);
+
+            current = 0;
+            for (int i = 0; i < c.getLength(); i++) {
+                current += c.get(x, i, c.getLength() - i - 1);
             }
             sums.add(current);
         }
@@ -122,7 +141,7 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
             }
         }
 
-        return count;
+        return -count;
     }
 }
 

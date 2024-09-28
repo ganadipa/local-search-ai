@@ -17,6 +17,11 @@ run: compile
 	@echo "Running the project..."
 	@$(JAVA) -cp $(BIN_DIR) $(MAIN_CLASS)
 
+debug: compile
+	@echo "Running the project in debug mode..."
+	@$(JAVA) -cp $(BIN_DIR) Debug
+
+
 clean:
 	@echo "Cleaning up..."
 	@rm -rf $(BIN_DIR)
