@@ -8,7 +8,7 @@ import solvers.SolverFactory;
 
 public class Main {
     public static void main(String[] args) {
-        Integer size = 5;
+        Integer size = 1;
         Cube cube = new Cube(size);
         
         // assign 1 to n^3 to the cube
