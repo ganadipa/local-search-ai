@@ -1,16 +1,25 @@
 package solvers;
 
+
+
 import heuristics.IHeuristic;
-import shapes.Cube;
+import problems.IProblem;
 
 public class SolverFactory {
-    public static ISolver createSolver(String algorithm, Cube cube, IHeuristic heuristic) {
-        if (algorithm.equals("hill-climbing")) {
-            return new HillClimbingSolver(cube, heuristic);
-        } else if (algorithm.equals("simulated-annealing")) {
-            return new SimulatedAnnealingSolver(cube, heuristic);
-        } else {
-            return null;
+    static public enum SolverType {
+        STEEPEST_ASCENT_HILL_CLIMBING,
+        SIDEWAYS_MOVE_HILL_CLIMBING,
+    }
+
+
+    public static <T extends IProblem> ISolver createSolver(SolverType algorithm, T problem, IHeuristic<T> heuristic) {
+        switch (algorithm) {
+            case STEEPEST_ASCENT_HILL_CLIMBING:
+                return new SteepestAscentHillClimbing<>(problem, heuristic);
+            case SIDEWAYS_MOVE_HILL_CLIMBING:
+                return new SidewaysMoveHillClimbing<>(problem, heuristic);
+            default:
+                throw new IllegalArgumentException("Unknown solver type: " + algorithm);
         }
     }
 }

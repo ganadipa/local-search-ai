@@ -1,16 +1,38 @@
+
+import heuristics.BaseHeuristic;
 import heuristics.IHeuristic;
-import heuristics.StandardDeviationHeuristic;
+import problems.MagicCube;
 import shapes.Cube;
 import solvers.ISolver;
 import solvers.SolverFactory;
 
 public class Main {
     public static void main(String[] args) {
-        Cube cube = new Cube(5);
+        Integer size = 5;
+        Cube cube = new Cube(size);
+        
+        // assign 1 to n^3 to the cube
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < size; k++) {
+                    cube.set(i, j, k, i * size * size + j * size + k + 1);
+                }
+            }
+        }
+        
+        // randomize the cube
+        cube.randomize();
 
-        IHeuristic std = new StandardDeviationHeuristic();
+        // create a magic cube
+        MagicCube magicCube = new MagicCube(cube);
 
-        ISolver solver = SolverFactory.createSolver("hill-climbing", cube, std);
+        // find a heuristic
+        IHeuristic<MagicCube> std = new BaseHeuristic();
+
+        // find a solver
+        ISolver solver = SolverFactory.createSolver(SolverFactory.SolverType.SIDEWAYS_MOVE_HILL_CLIMBING, magicCube, std);
+
+        // solve the cube
         solver.solve();
     }
 }

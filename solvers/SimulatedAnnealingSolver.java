@@ -8,7 +8,8 @@ public class SimulatedAnnealingSolver implements ISolver {
     private IHeuristic heuristic;
 
     public SimulatedAnnealingSolver(Cube cube, IHeuristic heuristic) {
-        // Implement the constructor here
+        this.cube = cube;
+        this.heuristic = heuristic;
     }
 
     public void solve() {

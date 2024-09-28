@@ -1,7 +1,7 @@
 package heuristics;
 
-import shapes.Cube;
+import problems.IProblem;
 
-public interface IHeuristic {
-    public double evaluate(Cube shape);
+public interface IHeuristic<T extends IProblem> {
+    double evaluate(T game);
 }

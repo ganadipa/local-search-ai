@@ -6,7 +6,7 @@ import java.util.List;
 import problems.MagicCube;
 import shapes.Cube;
 
-public class StandardDeviationHeuristic implements IHeuristic<MagicCube> {
+public class BaseHeuristic implements IHeuristic<MagicCube> {
     public double evaluate(MagicCube cube) {
         Cube c = cube.cube;
 
@@ -110,22 +110,19 @@ public class StandardDeviationHeuristic implements IHeuristic<MagicCube> {
             sums.add(current);
         }
 
-        // Calculate the mean
-        double mean = 0;
-        for (int sum : sums) {
-            mean += sum;
+        Integer NCubed = c.getLength() * c.getLength() * c.getLength();
+        Integer sumOneToNCubed = NCubed * (NCubed + 1) / 2;
+        Integer magicNumber = sumOneToNCubed / (c.getLength() * c.getLength());
+
+        // return how many in the sums that are not equal to the magic number
+        int count = 0;
+        for (Integer sum : sums) {
+            if (sum != magicNumber) {
+                count++;
+            }
         }
 
-        mean /= sums.size();
-
-        // Calculate the standard deviation
-        double standardDeviation = 0;
-        for (int sum : sums) {
-            standardDeviation += Math.pow(sum - mean, 2);
-        }
-
-        standardDeviation = Math.sqrt(standardDeviation / sums.size());
-
-        return standardDeviation;
+        return count;
     }
 }
+
