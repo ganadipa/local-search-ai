@@ -13,7 +13,7 @@ public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
         this.heuristic = heuristic;
     }
 
-    public void solve() {
+    public T getFinalState() {
         
         T currentProblem = (T) this.problem.clone();
         double score = heuristic.evaluate(currentProblem);
@@ -51,7 +51,7 @@ public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
         }
 
         // Print the result
-        System.out.println("Best score: " + score);
+        return currentProblem;
     }
 }
 

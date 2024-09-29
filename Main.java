@@ -1,5 +1,5 @@
 
-import heuristics.BaseHeuristic;
+import heuristics.NotEqualHeuristic;
 import heuristics.IHeuristic;
 import problems.MagicCube;
 import shapes.Cube;
@@ -8,7 +8,7 @@ import solvers.SolverFactory;
 
 public class Main {
     public static void main(String[] args) {
-        Integer size = 1;
+        Integer size = 5;
         Cube cube = new Cube(size);
         
         // assign 1 to n^3 to the cube
@@ -27,12 +27,12 @@ public class Main {
         MagicCube magicCube = new MagicCube(cube);
 
         // find a heuristic
-        IHeuristic<MagicCube> std = new BaseHeuristic();
+        IHeuristic<MagicCube> std = new NotEqualHeuristic();
 
         // find a solver
         ISolver solver = SolverFactory.createSolver(SolverFactory.SolverType.SIDEWAYS_MOVE_HILL_CLIMBING, magicCube, std);
 
-        // solve the cube
-        solver.solve();
+        // get the final state using this chosen local search
+        solver.getFinalState();
     }
 }

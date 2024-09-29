@@ -1,4 +1,4 @@
-import heuristics.BaseHeuristic;
+import heuristics.NotEqualHeuristic;
 import heuristics.IHeuristic;
 import problems.MagicCube;
 import shapes.Cube;
@@ -24,7 +24,7 @@ public class Debug {
         MagicCube magicCube = new MagicCube(cube);
 
         // find a heuristic
-        IHeuristic<MagicCube> std = new BaseHeuristic();
+        IHeuristic<MagicCube> std = new NotEqualHeuristic();
 
         System.out.println(std.evaluate(magicCube));
 

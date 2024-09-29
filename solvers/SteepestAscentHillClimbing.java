@@ -12,11 +12,11 @@ public class SteepestAscentHillClimbing<T extends IProblem> implements ISolver {
         this.heuristic = heuristic;
     }
 
-    public void solve() {
+    public T getFinalState() {
         
 
         T currentProblem = (T) this.problem.clone();
-        double score = -heuristic.evaluate(currentProblem);
+        double score = heuristic.evaluate(currentProblem);
 
         while (true) {
             T bestNeighbor = null;
@@ -43,7 +43,7 @@ public class SteepestAscentHillClimbing<T extends IProblem> implements ISolver {
         }
 
         // Print the result
-        System.out.println("Best score: " + score);
+        return currentProblem;
     }
 }
 

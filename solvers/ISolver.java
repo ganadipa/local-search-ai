@@ -1,8 +1,8 @@
 package solvers;
 
-/**
- * Interface for magic cube solvers
- */
+import problems.IProblem;
+
+
 public interface ISolver {
-    public void solve();
+    public IProblem getFinalState();
 }

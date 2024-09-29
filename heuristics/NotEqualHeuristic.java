@@ -5,7 +5,7 @@ import java.util.List;
 import problems.MagicCube;
 import shapes.Cube;
 
-public class BaseHeuristic implements IHeuristic<MagicCube> {
+public class NotEqualHeuristic implements IHeuristic<MagicCube> {
     public double evaluate(MagicCube cube) {
 
         Cube c = cube.cube;
@@ -27,4 +27,5 @@ public class BaseHeuristic implements IHeuristic<MagicCube> {
         return -count;
     }
 }
+
 

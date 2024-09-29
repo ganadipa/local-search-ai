@@ -1,18 +1,20 @@
 package solvers;
 
 import heuristics.IHeuristic;
+import problems.IProblem;
 import shapes.Cube;
 
-public class SimulatedAnnealingSolver implements ISolver {
+public class SimulatedAnnealingSolver<T extends IProblem> implements ISolver {
     private Cube cube;
-    private IHeuristic heuristic;
+    private IHeuristic<? extends IProblem> heuristic;
 
-    public SimulatedAnnealingSolver(Cube cube, IHeuristic heuristic) {
+    public SimulatedAnnealingSolver(Cube cube, IHeuristic<? extends IProblem> heuristic) {
         this.cube = cube;
         this.heuristic = heuristic;
     }
 
-    public void solve() {
+    public T getFinalState() {
         // Implement the Simulated Annealing algorithm here
+        return null;
     }
 }
