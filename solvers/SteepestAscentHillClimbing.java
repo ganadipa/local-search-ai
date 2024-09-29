@@ -25,7 +25,7 @@ public class SteepestAscentHillClimbing<T extends IProblem> implements ISolver {
             // Find the best neighbor
             for (IProblem neighbor : currentProblem.getNeighbours()) {
                 T castedNeighbor = (T) neighbor;
-                double neighborScore = -heuristic.evaluate(castedNeighbor);
+                double neighborScore = heuristic.evaluate(castedNeighbor);
                 
                 if (neighborScore > bestScore) {
                     bestNeighbor = castedNeighbor;
