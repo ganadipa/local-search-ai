@@ -1,8 +1,7 @@
 package solvers;
 
-import problems.IProblem;
 
 
-public interface ISolver<T extends IProblem> {
+public interface ISolver<T> {
     public T getFinalState(T problem);
 }

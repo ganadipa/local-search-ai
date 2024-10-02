@@ -3,7 +3,6 @@ package solvers;
 
 import heuristics.IHeuristic;
 import problems.IProblem;
-import solvers.SolverFactory.SolverType;
 public class RandomRestartHillClimbing<T extends IProblem> implements ISolver<T> {
     private IHeuristic<T> heuristic;
 
@@ -17,13 +16,11 @@ public class RandomRestartHillClimbing<T extends IProblem> implements ISolver<T>
         T current = (T) problem.clone();
         double score = heuristic.evaluate(current);
 
-        ISolver<T> solver= SolverFactory.createSolver(SolverFactory.SolverType.SIDEWAYS_MOVE_HILL_CLIMBING, heuristic);
+        ISolver<T> solver= new SteepestAscentHillClimbing<>(heuristic);
 
-        int count = 0;
-
+        int iter = 0;
         do {
-            count++;
-
+            // Find the local maxima
             T localMaxima = solver.getFinalState(current);
             double newScore = heuristic.evaluate(localMaxima);
 
@@ -32,9 +29,11 @@ public class RandomRestartHillClimbing<T extends IProblem> implements ISolver<T>
                 score = newScore;
             }
 
-            System.out.println("Iteration " + count + ": " + score);
-
+            // Randomize the current cube
             current.randomize();
+
+            iter++;
+            System.out.println("Iteration " + iter + ": " + score);
             
         } while (score != 0);
 

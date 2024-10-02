@@ -10,9 +10,14 @@ import utilities.Triplet;
 public class MagicCube implements IProblem {
 
     public Cube cube;
+    public Integer magicNumber;
 
     public MagicCube(Cube cube) {
         this.cube = cube;
+
+        Integer size = cube.getLength();
+        Integer NCubed = size * size * size;
+        magicNumber = (NCubed * (NCubed + 1) / 2)/(size * size);
     }
     
 

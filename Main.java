@@ -1,11 +1,13 @@
 
 import heuristics.NotEqualHeuristic;
 import heuristics.StandardDeviationHeuristic;
+import heuristics.DifferenceMagicNumber;
 import heuristics.IHeuristic;
+import heuristics.NotEqualAndStdHeuristic;
 import problems.MagicCube;
 import shapes.Cube;
 import solvers.ISolver;
-import solvers.SolverFactory;
+import solvers.RandomRestartHillClimbing;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,10 +31,10 @@ public class Main {
         magicCube.randomize();
 
         // find a heuristic
-        IHeuristic<MagicCube> std = new StandardDeviationHeuristic();
+        IHeuristic<MagicCube> heur = new DifferenceMagicNumber();
 
         // find a solver
-        ISolver<MagicCube> solver = SolverFactory.createSolver(SolverFactory.SolverType.SIMULATED_ANNEALING, std);
+        ISolver<MagicCube> solver = new RandomRestartHillClimbing<>(heur);
 
         // get the final state using this chosen local search
         solver.getFinalState(magicCube);
