@@ -3,19 +3,17 @@ package solvers;
 
 import heuristics.IHeuristic;
 import problems.IProblem;
-public class SteepestAscentHillClimbing<T extends IProblem> implements ISolver {
-    private T problem;
+public class SteepestAscentHillClimbing<T extends IProblem> implements ISolver<T> {
     private IHeuristic<T> heuristic;
 
-    public SteepestAscentHillClimbing(T problem, IHeuristic<T> heuristic) {
-        this.problem = problem;
+    public SteepestAscentHillClimbing(IHeuristic<T> heuristic) {
         this.heuristic = heuristic;
     }
 
-    public T getFinalState() {
+    public T getFinalState(T problem) {
         
 
-        T currentProblem = (T) this.problem.clone();
+        T currentProblem = (T) problem.clone();
         double score = heuristic.evaluate(currentProblem);
 
         while (true) {

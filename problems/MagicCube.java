@@ -171,5 +171,31 @@ public class MagicCube implements IProblem {
 
         return sums;
     }
+
+    public void randomize() {
+        cube.randomize();
+    }
+
+    public MagicCube generateRandomNeighbour() {
+
+        // Clone the current cube
+        MagicCube neighbour = this.clone();
+
+        // Generate random triplet
+        Triplet<Integer, Integer, Integer> from = new Triplet<>(0, 0, 0);
+        Triplet<Integer, Integer, Integer> to = new Triplet<>(0, 0, 0);
+
+        while (from.equals(to)) {
+            from = new Triplet<>((int) (Math.random() * cube.getLength()), (int) (Math.random() * cube.getLength()), (int) (Math.random() * cube.getLength()));
+            to = new Triplet<>((int) (Math.random() * cube.getLength()), (int) (Math.random() * cube.getLength()), (int) (Math.random() * cube.getLength()));
+        }
+
+        // Swap the values
+        int temp = neighbour.cube.get(from.first, from.second, from.third);
+        neighbour.cube.set(from.first, from.second, from.third, neighbour.cube.get(to.first, to.second, to.third));
+        neighbour.cube.set(to.first, to.second, to.third, temp);
+
+        return neighbour;
+    }
     
 }

@@ -1,5 +1,6 @@
 
 import heuristics.NotEqualHeuristic;
+import heuristics.StandardDeviationHeuristic;
 import heuristics.IHeuristic;
 import problems.MagicCube;
 import shapes.Cube;
@@ -8,7 +9,7 @@ import solvers.SolverFactory;
 
 public class Main {
     public static void main(String[] args) {
-        Integer size = 5;
+        Integer size = 3;
         Cube cube = new Cube(size);
         
         // assign 1 to n^3 to the cube
@@ -19,20 +20,21 @@ public class Main {
                 }
             }
         }
-        
-        // randomize the cube
-        cube.randomize();
+    
 
         // create a magic cube
         MagicCube magicCube = new MagicCube(cube);
 
+        // randomize the cube
+        magicCube.randomize();
+
         // find a heuristic
-        IHeuristic<MagicCube> std = new NotEqualHeuristic();
+        IHeuristic<MagicCube> std = new StandardDeviationHeuristic();
 
         // find a solver
-        ISolver solver = SolverFactory.createSolver(SolverFactory.SolverType.SIDEWAYS_MOVE_HILL_CLIMBING, magicCube, std);
+        ISolver<MagicCube> solver = SolverFactory.createSolver(SolverFactory.SolverType.SIMULATED_ANNEALING, std);
 
         // get the final state using this chosen local search
-        solver.getFinalState();
+        solver.getFinalState(magicCube);
     }
 }

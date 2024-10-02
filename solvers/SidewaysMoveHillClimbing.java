@@ -3,19 +3,17 @@ package solvers;
 
 import heuristics.IHeuristic;
 import problems.IProblem;
-public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver {
-    private T problem;
+public class SidewaysMoveHillClimbing<T extends IProblem> implements ISolver<T> {
     private IHeuristic<T> heuristic;
     private final int MAX_SIDEWAYS_MOVES = 100;
 
-    public SidewaysMoveHillClimbing(T problem, IHeuristic<T> heuristic) {
-        this.problem = problem;
+    public SidewaysMoveHillClimbing(IHeuristic<T> heuristic) {
         this.heuristic = heuristic;
     }
 
-    public T getFinalState() {
+    public T getFinalState(T problem) {
         
-        T currentProblem = (T) this.problem.clone();
+        T currentProblem = (T) problem.clone();
         double score = heuristic.evaluate(currentProblem);
 
         int sidewaysMoves = 0;
